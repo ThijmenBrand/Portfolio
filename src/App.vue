@@ -2,13 +2,7 @@
 </script>
 
 <template>
-<p>Hello world</p>
-<p>This works!</p>
-<p>Aaaaa</p>
+  <router-view />
 </template>
 
-<style scoped>
-p {
-  color: green;
-}
-</style>
+<style scoped></style>
