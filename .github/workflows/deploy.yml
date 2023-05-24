@@ -35,13 +35,12 @@ jobs:
     needs: init
     steps:
       - name: Print
-        run: echo "environment=${{needs.init.outputs.env_name}}"
+        run: echo "environment=${{github.base_ref}}"
     
   build_and_deploy_job:
     needs: init
     name: "Build and Deploy to ${{needs.init.outputs.env_name}}"
-    environment: 
-      name: ${{ needs.build.outputs.env_name }}
+    environment: ${{github.base_ref}}
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     steps:
@@ -65,8 +64,7 @@ jobs:
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
-    environment: 
-      name: ${{ needs.build.outputs.env_name }}
+    environment: ${{github.base_ref}}
     name: Close Pull Request Job
     steps:
       - name: Close Pull Request
