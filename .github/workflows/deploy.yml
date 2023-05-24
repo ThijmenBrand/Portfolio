@@ -6,16 +6,10 @@ on:
       - develop
       - production
 
-jobs:       
-  print:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print
-        run: echo "${{github.ref_name}}"
-    
+jobs:         
   build_and_deploy_job:
     name: "Build and Deploy to ${{needs.init.outputs.env_name}}"
-    environment: ${{github.base_ref}}
+    environment: ${{github.ref_name}}
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +33,7 @@ jobs:
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
-    environment: ${{github.base_ref}}
+    environment: ${{github.ref_name}}
     name: Close Pull Request Job
     steps:
       - name: Close Pull Request
