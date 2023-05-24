@@ -3,6 +3,7 @@
 
 <template>
 <p>Hello world</p>
+<p>This works!</p>
 </template>
 
 <style scoped>
