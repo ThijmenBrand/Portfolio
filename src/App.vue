@@ -4,6 +4,7 @@
 <template>
 <p>Hello world</p>
 <p>This works!</p>
+<p>Aaaaa</p>
 </template>
 
 <style scoped>
