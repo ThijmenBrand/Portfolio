@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo "${{github.env}}"
+        run: echo "${{github.ref_name}}"
     
   build_and_deploy_job:
     name: "Build and Deploy to ${{needs.init.outputs.env_name}}"
