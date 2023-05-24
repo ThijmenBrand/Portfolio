@@ -7,28 +7,35 @@ on:
       - production
 
 jobs:
-  build:
-    - name: Some check on branch
-      runs-on: ubuntu-latest
-      id: branch_check
-      run: |
-        echo "Running on branch ${{ github.ref }}"
-        if [ "${{ github.ref }}" = "refs/heads/production" ]; then
-          echo "::set-output name=env_name::Production"
-        elif [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-          echo "::set-output name=env_name::develop"
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      env_name: ${{ steps.setvars.outputs.env_name }}
 
-    - name: Use variable setup in previous step
-      run: echo "I'm using variable ${{ steps.branch_check.outputs.env_name }}"
+    steps:
+      - name: Cancel previous workflow
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ github.token }}
 
-      outputs:
-        env_name: ${{ steps.branch_check.outputs.env_name }}
+      - name: Get Working Envionment
+        id: getEnvironment
+        run: |
+          if [[ "${{github.base_ref}}" == "production" || "${{github.ref}}" == "refs/heads/production" ]]; then
+            echo "::set-output name=env_name::Production"
+          fi
+
+          if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
+            echo "::set-output name=env_name::Develop"
+          fi
     
   build_and_deploy_job:
+    needs: init
+    name: "Build and Deploy to ${{needs.init.outputs.env_name}}"
+    environment: 
+      name: ${{ needs.build.outputs.env_name }}
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    environment: production
-    name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
         with:
