@@ -30,27 +30,6 @@ myMSALObj
     console.error(err);
   });
 
-function selectAccount() {
-  const currentAccounts = myMSALObj.getAllAccounts();
-
-  if (currentAccounts.length === 0) {
-    return;
-  } else if (currentAccounts.length > 1) {
-    // Add your account choosing logic here
-    console.warn("Multiple accounts detected.");
-  } else if (currentAccounts.length === 1) {
-    username = currentAccounts[0].username;
-  }
-}
-
-function handleResponse(response: any) {
-  if (response !== null) {
-    username = response.account.username;
-  } else {
-    selectAccount();
-  }
-}
-
 function signIn() {
   myMSALObj.loginRedirect(loginRequest);
 }

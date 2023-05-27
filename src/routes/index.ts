@@ -14,7 +14,7 @@ const router = createRouter({
   routes: routes,
 });
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
   const loggedIn = checkUserLoggedIn();
 
   if (!loggedIn && to.name !== "Login") {
