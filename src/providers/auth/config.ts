@@ -8,8 +8,6 @@ const redirectUri =
     ? "https://production.thijmenbrand.nl/login"
     : "http://localhost:5173/login";
 
-console.log(redirectUri);
-
 const msalConfig: Configuration = {
   auth: {
     clientId: "458e7102-0723-448f-8c46-7be309084831",
