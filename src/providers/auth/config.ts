@@ -1,12 +1,9 @@
 import { Configuration, LogLevel } from "@azure/msal-browser";
 
 console.log(import.meta.env);
-const redirectUri =
-  import.meta.env.ENVIRONMENT === "develop"
-    ? "https://develop.thijmenbrand.nl/login"
-    : import.meta.env.ENVIRONMENT === "production"
-    ? "https://production.thijmenbrand.nl/login"
-    : "http://localhost:5173/login";
+const redirectUri = import.meta.env.PROD
+  ? "https://develop.thijmenbrand.nl/login"
+  : "http://localhost:5173/login";
 
 const msalConfig: Configuration = {
   auth: {
