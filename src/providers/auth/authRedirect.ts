@@ -8,7 +8,6 @@ import callMSGraph from "./graph";
 import graphConfig from "./graphConfig";
 import router from "../../routes";
 
-// configuration parameters are located at authConfig.js
 const myMSALObj = new PublicClientApplication(msalConfig);
 
 function checkUserLoggedIn() {
@@ -31,18 +30,7 @@ myMSALObj
     console.error(err);
   });
 
-/**
- * A promise handler needs to be registered for handling the
- * response returned from redirect flow. For more information, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/acquire-token.md
- */
-
 function selectAccount() {
-  /**
-   * See here for more info on account retrieval:
-   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-   */
-
   const currentAccounts = myMSALObj.getAllAccounts();
 
   if (currentAccounts.length === 0) {
@@ -64,20 +52,10 @@ function handleResponse(response: any) {
 }
 
 function signIn() {
-  /**
-   * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-   */
-
   myMSALObj.loginRedirect(loginRequest);
 }
 
 function signOut() {
-  /**
-   * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-   */
-
   const logoutRequest = {
     account: myMSALObj.getAccountByUsername(username),
     postLogoutRedirectUri: msalConfig.auth.redirectUri,
@@ -87,10 +65,6 @@ function signOut() {
 }
 
 function getTokenRedirect(request: any) {
-  /**
-   * See here for more info on account retrieval:
-   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-   */
   request.account = myMSALObj.getAccountByUsername(username);
 
   return myMSALObj.acquireTokenSilent(request).catch((error) => {

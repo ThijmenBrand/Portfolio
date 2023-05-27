@@ -1,11 +1,20 @@
 import { Configuration, LogLevel } from "@azure/msal-browser";
 
+const redirectUri =
+  import.meta.env.ENVIRONMENT === "development"
+    ? "https://develop.thijmenbrand.nl/login"
+    : import.meta.env.ENVIRONMENT === "production"
+    ? "https://production.thijmenbrand.nl/login"
+    : "http://localhost:5173/login";
+
+console.log(redirectUri);
+
 const msalConfig: Configuration = {
   auth: {
     clientId: "458e7102-0723-448f-8c46-7be309084831",
     authority:
       "https://login.microsoftonline.com/35c15bd7-41e6-48f7-9bc1-f95027ab4dd1",
-    redirectUri: "http://localhost:5173",
+    redirectUri: redirectUri,
   },
   cache: {
     cacheLocation: "sessionStorage",
