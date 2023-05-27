@@ -1,5 +1,6 @@
 import { Configuration, LogLevel } from "@azure/msal-browser";
 
+console.log(import.meta.env);
 const redirectUri =
   import.meta.env.ENVIRONMENT === "development"
     ? "https://develop.thijmenbrand.nl/login"
