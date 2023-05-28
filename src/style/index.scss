@@ -2,31 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100;500;700;900&family=Cutive+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@700&family=Josefin+Sans:wght@700&display=swap");
 
-html {
-    height: 100%;
-}
-
 body {
   margin: 0;
   font-family: "Cutive Mono", monospace;
   background: linear-gradient(-45deg, #061136, #0d0225, #162455);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  min-height: 100%;
-}
-
-a {
-  text-decoration: none;
-  color: #162455;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: "Josefin Sans", sans-serif;
-  color: white;
-}
-
-p {
-    color: white;
+  height: 100vh;
+  scroll-behavior: smooth;
 }
 
 @keyframes gradient {
