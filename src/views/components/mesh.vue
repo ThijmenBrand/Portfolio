@@ -78,7 +78,7 @@ function make(p: p5) {
     }
 
     p.draw = function () {
-        this.clear();
+        this.clear(0, 0, 0, 0);
         for (let i = 0; i < dots.length; i++) {
             const dotI = dots[i];
             dotI.Move()
