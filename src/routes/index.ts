@@ -1,12 +1,12 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
-import SignIn from "@/views/Home.vue";
-import Home from "@/views/Portal/Portal.vue";
-import { checkUserLoggedIn } from "../providers/auth/authRedirect";
+import Home from "@/views/Home.vue";
+import Portal from "@/views/Portal/Portal.vue";
+import useAuthStore from "../stores/auth";
 
 const routes: Array<RouteRecordRaw> = [
-  { path: "/portal", name: "Portal", component: Home },
-  { path: "/", name: "Home", component: SignIn },
+  { path: "/portal", name: "Portal", component: Portal },
+  { path: "/", name: "Home", component: Home },
 ];
 
 const router = createRouter({
@@ -15,7 +15,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const loggedIn = checkUserLoggedIn();
+  const authStore = useAuthStore();
+  const loggedIn = authStore.userInfo;
 
   if (!loggedIn && to.name !== "Home") {
     return { name: "Home" };

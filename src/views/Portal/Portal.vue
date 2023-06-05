@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { signOut } from '../../providers/auth/authRedirect';
+import useAuthStore from "../../stores/auth";
+
+const authStore = useAuthStore();
 </script>
 
 <template>
-    <h4 @click="signOut">Logout</h4>
-    <h1>Home</h1>
+  <h4 @click="authStore.signOut()">Logout</h4>
+  <h1>Home</h1>
 </template>

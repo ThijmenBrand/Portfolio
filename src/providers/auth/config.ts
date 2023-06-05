@@ -1,6 +1,9 @@
-import { Configuration, LogLevel } from "@azure/msal-browser";
+import {
+  Configuration,
+  LogLevel,
+  PublicClientApplication,
+} from "@azure/msal-browser";
 
-console.log(import.meta.env);
 const redirectUri = import.meta.env.PROD
   ? "https://develop.thijmenbrand.nl/login"
   : "http://localhost:3000/login";
@@ -41,6 +44,8 @@ const msalConfig: Configuration = {
   },
 };
 
+const msalObject = new PublicClientApplication(msalConfig);
+
 const loginRequest = {
   scopes: ["User.Read"],
 };
@@ -50,4 +55,4 @@ const tokenRequest = {
   forceRefresh: false,
 };
 
-export { msalConfig, loginRequest, tokenRequest };
+export { msalConfig, loginRequest, tokenRequest, msalObject };
