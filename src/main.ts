@@ -3,30 +3,16 @@ import { createPinia } from "pinia";
 import "./style/index.scss";
 import App from "./App.vue";
 import router from "./routes";
-import { msalObject } from "./providers/auth/config";
-import useAuthStore from "./stores/auth";
+
+import { MSALInstance, setupMSAL } from "./providers/authv2/auth.config";
+import { msalPlugin } from "./providers/authv2/auth.plugin";
+
+setupMSAL(router);
 
 const app = createApp(App);
-const pinia = createPinia();
 
-app.use(pinia);
-
-const authStore = useAuthStore();
-msalObject
-  .handleRedirectPromise()
-  .then(() => {
-    const userLoggedIn = msalObject.getAllAccounts();
-    console.log(userLoggedIn);
-    if (userLoggedIn.length === 0) {
-      authStore.userInfo = null;
-    } else {
-      authStore.userInfo = userLoggedIn[0];
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
+app.use(createPinia());
 app.use(router);
+app.use(msalPlugin, MSALInstance);
 
 app.mount("#app");

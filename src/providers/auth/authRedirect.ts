@@ -1,5 +1,11 @@
-import { PublicClientApplication } from "@azure/msal-browser";
-import { msalConfig } from "./config";
+import {
+  AuthenticationResult,
+  InteractionRequiredAuthError,
+  PublicClientApplication,
+} from "@azure/msal-browser";
+import { loginRequest, msalConfig } from "./config";
+import callMSGraph from "./graph";
+import graphConfig from "./graphConfig";
 
 export const myMSALObj = new PublicClientApplication(msalConfig);
 
@@ -12,6 +18,8 @@ function checkUserLoggedIn() {
   }
 }
 
+let username = "";
+
 myMSALObj
   .handleRedirectPromise()
   .then(() => {
@@ -21,32 +29,42 @@ myMSALObj
     console.error(err);
   });
 
-// function getTokenRedirect(request: any) {
-//   request.account = myMSALObj.getAccountByUsername(username);
+const signIn = () => myMSALObj.loginRedirect(loginRequest);
+const signOut = () => {
+  const logoutRequest = {
+    account: myMSALObj.getAccountByUsername(username),
+    postLogoutRedirectUri: msalConfig.auth.redirectUri,
+  };
 
-//   return myMSALObj.acquireTokenSilent(request).catch((error) => {
-//     console.warn(
-//       "silent token acquisition fails. acquiring token using redirect"
-//     );
-//     if (error instanceof InteractionRequiredAuthError) {
-//       // fallback to interaction when silent call fails
-//       return myMSALObj.acquireTokenRedirect(request);
-//     } else {
-//       console.warn(error);
-//     }
-//   });
-// }
+  myMSALObj.logoutRedirect(logoutRequest);
+};
 
-// function seeProfile() {
-//   getTokenRedirect(loginRequest)
-//     .then((response?: AuthenticationResult | void) => {
-//       callMSGraph(graphConfig.graphMeEndpoint, response!.accessToken, () =>
-//         console.log(response)
-//       );
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
+function getTokenRedirect(request: any) {
+  request.account = myMSALObj.getAccountByUsername(username);
 
-// export { signIn, signOut, seeProfile, getTokenRedirect, checkUserLoggedIn };
+  return myMSALObj.acquireTokenSilent(request).catch((error) => {
+    console.warn(
+      "silent token acquisition fails. acquiring token using redirect"
+    );
+    if (error instanceof InteractionRequiredAuthError) {
+      // fallback to interaction when silent call fails
+      return myMSALObj.acquireTokenRedirect(request);
+    } else {
+      console.warn(error);
+    }
+  });
+}
+
+function seeProfile() {
+  getTokenRedirect(loginRequest)
+    .then((response?: AuthenticationResult | void) => {
+      callMSGraph(graphConfig.graphMeEndpoint, response!.accessToken, () =>
+        console.log(response)
+      );
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export { signIn, signOut, seeProfile, getTokenRedirect, checkUserLoggedIn };

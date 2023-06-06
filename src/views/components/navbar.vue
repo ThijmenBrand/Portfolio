@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { useRouter } from "vue-router";
-import useAuthStore from "../../stores/auth";
 
 const router = useRouter();
-const authStore = useAuthStore();
-
-const userLoggedIn = computed(() => authStore.getUserInfo);
 
 const routeToHome = () => {
   router.push({ name: "Portal" });
@@ -25,13 +20,8 @@ const routeToHome = () => {
       <hr />
     </span>
     <span class="login">
-      <img
-        v-if="userLoggedIn.value"
-        @click="routeToHome"
-        src="@/assets/home.svg"
-        alt=""
-      />
-      <img v-else @click="authStore.signIn()" src="@/assets/login.svg" alt="" />
+      <img v-if="true" @click="routeToHome" src="@/assets/home.svg" alt="" />
+      <img v-else src="@/assets/login.svg" alt="" />
     </span>
   </nav>
 </template>

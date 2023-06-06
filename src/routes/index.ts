@@ -2,7 +2,7 @@ import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/views/Home.vue";
 import Portal from "@/views/Portal/Portal.vue";
-import useAuthStore from "../stores/auth";
+import { registerAuthGuard } from "../providers/authv2/auth.guard";
 
 const routes: Array<RouteRecordRaw> = [
   { path: "/portal", name: "Portal", component: Portal },
@@ -14,13 +14,15 @@ const router = createRouter({
   routes: routes,
 });
 
-router.beforeEach(async (to) => {
-  const authStore = useAuthStore();
-  const loggedIn = authStore.userInfo;
+registerAuthGuard(router);
 
-  if (!loggedIn && to.name !== "Home") {
-    return { name: "Home" };
-  }
-});
+// router.beforeEach(async (to) => {
+//   const authStore = useAuthStore();
+//   const loggedIn = authStore.userInfo;
+
+//   if (!loggedIn && to.name !== "Home") {
+//     return { name: "Home" };
+//   }
+// });
 
 export default router;
