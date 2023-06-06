@@ -1,11 +1,5 @@
-import {
-  InteractionRequiredAuthError,
-  PublicClientApplication,
-  AuthenticationResult,
-} from "@azure/msal-browser";
-import { loginRequest, msalConfig } from "./config";
-import callMSGraph from "./graph";
-import graphConfig from "./graphConfig";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { msalConfig } from "./config";
 
 export const myMSALObj = new PublicClientApplication(msalConfig);
 
