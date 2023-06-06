@@ -44,6 +44,12 @@ onMounted(checkAuthState);
 </template>
 
 <style lang="scss" scoped>
+@media screen and (max-width: $medium) {
+  .login {
+    display: none;
+  }
+}
+
 nav {
   display: flex;
   flex-direction: row;

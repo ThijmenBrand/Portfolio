@@ -87,6 +87,30 @@ onMounted(showTooltip);
 </template>
 
 <style lang="scss" scoped>
+@media screen and (max-width: $medium) {
+  section {
+    .section-wrapper {
+      flex-direction: column;
+
+      div {
+        margin: 1em 0em 1em 0em;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .form-element {
+          margin: 2em 0em 2em 0em !important;
+        }
+        button {
+          width: 80% !important;
+        }
+      }
+    }
+  }
+}
 section {
   color: white;
   width: min(100ch, 100%);
@@ -116,7 +140,7 @@ section {
         border-left: none;
         border-right: none;
         border-bottom: 2px solid white;
-        margin: 2em;
+        margin: 2em 2em 2em 0em;
         transition: 0.5s;
         color: white;
 

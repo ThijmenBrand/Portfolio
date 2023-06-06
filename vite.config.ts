@@ -17,6 +17,13 @@ export default defineConfig({
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/style/global.scss";`,
+      },
+    },
+  },
   server: {
     port: 3000,
     open: true,

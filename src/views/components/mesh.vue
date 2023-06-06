@@ -59,7 +59,8 @@ function RandomNum(min: number, max: number) {
 
 function make(p: p5) {
   const dots: Array<dot> = new Array();
-  const dotAmount = 120;
+  const windowWidth = window.innerWidth;
+  const dotAmount = Math.pow(windowWidth, 0.7);
 
   const drawLine = (
     cords1: { x: number; y: number },

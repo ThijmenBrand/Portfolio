@@ -28,7 +28,7 @@ onMounted(showTooltip);
 <template>
   <section class="highlighted-section">
     <sectionTitle id="recent-work-title">MY RECENT WORK</sectionTitle>
-    <p>
+    <p class="work-description">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
       pellentesque consectetur elit, nec mollis tellus pulvinar id. Phasellus ut
       pulvinar ipsum. Ut commodo rutrum velit a condimentum. Aenean sed risus
@@ -63,6 +63,24 @@ onMounted(showTooltip);
 </template>
 
 <style lang="scss" scoped>
+@media screen and (max-width: $medium) {
+  .highlighted-section {
+    .work-description {
+      font-size: 1em;
+      margin: 0em 1.5em 0em 1.5em;
+    }
+    .projects {
+      flex-direction: column !important;
+      align-items: center;
+
+      .project {
+        width: 70% !important;
+        padding: 2.5em;
+      }
+    }
+  }
+}
+
 .highlighted-section {
   color: white;
   width: min(100ch, 100%);
@@ -70,6 +88,10 @@ onMounted(showTooltip);
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .work-description {
+    text-align: center;
+  }
 
   .projects {
     display: flex;

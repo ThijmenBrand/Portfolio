@@ -39,6 +39,7 @@ import downloadCvCursor from "./components/downloadCvCursor.vue";
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     .message {
       margin: 0;
