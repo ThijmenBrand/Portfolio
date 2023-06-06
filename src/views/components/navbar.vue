@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { isAuthenticated } from "../../providers/authv2/auth.guard";
+import { MSALInstance } from "../../providers/authv2/auth.config";
+import { signIn } from "../../providers/authv2/auth.utils";
+import { onMounted, ref } from "vue";
+
+const authenticated = ref(false);
+
+const checkAuthState = async () => {
+  authenticated.value = await isAuthenticated(MSALInstance);
+};
 
 const router = useRouter();
 
 const routeToHome = () => {
   router.push({ name: "Portal" });
 };
+
+onMounted(checkAuthState);
 </script>
 
 <template>
@@ -20,8 +32,13 @@ const routeToHome = () => {
       <hr />
     </span>
     <span class="login">
-      <img v-if="true" @click="routeToHome" src="@/assets/home.svg" alt="" />
-      <img v-else src="@/assets/login.svg" alt="" />
+      <img
+        v-if="authenticated"
+        @click="routeToHome"
+        src="@/assets/home.svg"
+        alt=""
+      />
+      <img v-else @click="signIn" src="@/assets/login.svg" alt="" />
     </span>
   </nav>
 </template>

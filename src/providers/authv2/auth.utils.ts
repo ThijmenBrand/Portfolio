@@ -1,4 +1,9 @@
-import { MSALInstance } from "./auth.config";
+import { MSALInstance, loginRequest } from "./auth.config";
+
+export const signIn = () => MSALInstance.loginRedirect(loginRequest);
+
+export const signOut = () =>
+  MSALInstance.logoutRedirect({ postLogoutRedirectUri: "/" });
 
 export const acquireAccessToken = async () => {
   const account = MSALInstance.getAllAccounts()[0];
