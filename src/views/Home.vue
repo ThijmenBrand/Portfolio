@@ -6,55 +6,65 @@ import recentwork from "./components/recentwork.vue";
 import contact from "./components/contact.vue";
 import projectCursor from "./components/projectCursor.vue";
 import downloadCvCursor from "./components/downloadCvCursor.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 </script>
 
 <template>
   <projectCursor />
   <downloadCvCursor />
 
-  <section class="hero-section">
+  <div class="home-page">
     <navbar />
-    <div class="greeting-message-container">
-      <h1 class="greeting-message">Hello, I am Thijmen Brand</h1>
-      <h1 class="message">software developer and coder</h1>
-      <div class="button-container">
-        <baseButton>Checkout my work</baseButton>
+
+    <section class="hero-section">
+      <div>
+        <h1 class="greeting-message">Hello, I am Thijmen Brand</h1>
+        <h1 class="message">software developer and coder</h1>
       </div>
-    </div>
+      <div class="button-container">
+        <baseButton @click="() => router.push({ name: 'Projects' })"
+          >Checkout my work</baseButton
+        >
+      </div>
+    </section>
+
     <Mesh />
-  </section>
+  </div>
+
   <recentwork />
   <contact />
 </template>
 
 <style lang="scss" scoped>
-.hero-section {
-  color: white;
-  align-items: center;
+.home-page {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  .greeting-message-container {
-    height: 88vh;
+  .hero-section {
+    flex: 1;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
 
-    .message {
-      margin: 0;
-      font-size: 2em;
-      font-weight: lighter;
-    }
+    div {
+      text-align: center;
+      .message {
+        margin: 0;
+        font-size: 2vw;
+        font-weight: lighter;
+      }
 
-    .greeting-message {
-      font-size: 3em;
-      font-weight: lighter;
-      margin-top: 10vh;
+      .greeting-message {
+        font-size: 4vw;
+        font-weight: lighter;
+      }
     }
 
     .button-container {
-      height: 40vh;
+      flex: 1;
       display: flex;
       align-items: center;
     }

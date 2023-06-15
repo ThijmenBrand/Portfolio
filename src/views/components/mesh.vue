@@ -127,9 +127,6 @@ onMounted(() => {
 
 <style scoped lang="scss">
 #mesh-thing {
-  width: 100%;
   height: 30vh;
-  position: absolute;
-  bottom: 0;
 }
 </style>

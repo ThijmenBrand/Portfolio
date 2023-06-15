@@ -2,6 +2,9 @@
 import { onMounted } from "vue";
 import baseButton from "./button.vue";
 import sectionTitle from "./sectionTitle.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 function showTooltip() {
   const imageContainer = document.getElementById("project-1")!;
@@ -57,7 +60,9 @@ onMounted(showTooltip);
     </div>
 
     <div class="button-container">
-      <baseButton>Click here to see all of my work</baseButton>
+      <baseButton @click="router.push({ name: 'Projects' })"
+        >Click here to see all of my work</baseButton
+      >
     </div>
   </section>
 </template>

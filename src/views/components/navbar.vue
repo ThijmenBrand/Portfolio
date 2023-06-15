@@ -54,6 +54,8 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  color: white;
 
   .logo {
     margin: 0;
