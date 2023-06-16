@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import projectCard from "./projectCard.vue";
 import Project from "../../../logic/types/project";
-import { onMounted, ref, watch, defineProps } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 const props = defineProps({
   projects: {
