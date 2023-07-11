@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import Project from "../../logic/types/project";
 import projectCarousel from "./components/projectCarousel.vue";
+import axios from "axios";
+
+axios
+  .get("/backend/Controllers/GetLatestProjectsController.php")
+  .then((data) => console.log(data));
 
 const projects = new Array<Project>(20).fill({
   title: "SOME COOL PROJECT",
   category: "WEB",
-  imageUrl: "@/assets/project-placeholder-3.webp",
+  imageurl: "@/assets/project-placeholder-3.webp",
   id: 1,
+  contenturl: "test",
 });
 </script>
 

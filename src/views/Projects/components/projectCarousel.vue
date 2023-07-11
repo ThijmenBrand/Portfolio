@@ -2,6 +2,7 @@
 import projectCard from "./projectCard.vue";
 import Project from "../../../logic/types/project";
 import { onMounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   projects: {
@@ -10,7 +11,14 @@ const props = defineProps({
   },
 });
 
+const router = useRouter();
+
 let currentIndex = ref<number>(0);
+
+const redirectToProject = (projectId: string) => {
+  console.log(projectId);
+  router.push({ name: "Project", params: { projectId: projectId } });
+};
 
 function carousel() {
   const carouselElement = document.getElementById("carousel")!;
@@ -45,10 +53,20 @@ function carousel() {
 
   const activateCard = () => {
     cards.map((card) => card.classList.remove("active"));
+    cards.map((card) =>
+      card.removeEventListener("click", () => redirectToProject)
+    );
 
-    cards[currentIndex.value].classList.add("active");
-    cards[currentIndex.value].nextElementSibling?.classList.add("active");
-    cards[currentIndex.value].previousElementSibling?.classList.add("active");
+    const currentCard = cards[currentIndex.value];
+
+    currentCard.classList.add("active");
+    currentCard.nextElementSibling?.classList.add("active");
+    currentCard.previousElementSibling?.classList.add("active");
+
+    const projectId = currentCard.getAttribute("data-id");
+    currentCard.addEventListener("click", () =>
+      redirectToProject(projectId ?? "")
+    );
   };
 
   const scroll = () => {
@@ -140,7 +158,7 @@ onMounted(() => carousel().init());
     height: 100%;
 
     &::-webkit-scrollbar {
-      display: none;
+      transition: 0.2s linear;
     }
   }
 

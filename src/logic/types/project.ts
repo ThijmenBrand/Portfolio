@@ -1,8 +1,9 @@
 interface Project {
   id: number;
-  category: string;
   title: string;
-  imageUrl: string;
+  category: string;
+  imageurl: string;
+  contenturl: string;
 }
 
 export default Project;

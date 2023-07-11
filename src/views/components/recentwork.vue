@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import baseButton from "./button.vue";
 import sectionTitle from "./sectionTitle.vue";
 import { useRouter } from "vue-router";
+import { onMounted } from "vue";
 
 const router = useRouter();
 
 function showTooltip() {
-  const imageContainer = document.getElementById("project-1")!;
-  const imageContainerTwo = document.getElementById("project-2")!;
-
   const tooltip = document.getElementById("project-hover-cursor")!;
+
+  const project1 = document.getElementById("project-1")!;
+  const project2 = document.getElementById("project-2")!;
 
   const tooltipShowCallback = (e: MouseEvent) => {
     tooltip.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
@@ -18,11 +18,11 @@ function showTooltip() {
   };
   const tooltipHideCallback = () => (tooltip.style.display = "none");
 
-  imageContainer.addEventListener("mousemove", tooltipShowCallback);
-  imageContainerTwo.addEventListener("mousemove", tooltipShowCallback);
+  project1.addEventListener("mousemove", tooltipShowCallback);
+  project2.addEventListener("mousemove", tooltipShowCallback);
 
-  imageContainer.addEventListener("mouseleave", tooltipHideCallback);
-  imageContainerTwo.addEventListener("mouseleave", tooltipHideCallback);
+  project1.addEventListener("mouseleave", tooltipHideCallback);
+  project2.addEventListener("mouseleave", tooltipHideCallback);
 }
 
 onMounted(showTooltip);
@@ -41,19 +41,17 @@ onMounted(showTooltip);
     <div class="projects">
       <div class="project">
         <span>
-          <p class="project-title">project title</p>
-          <p>category</p>
+          <p class="project-title">Makhno studio</p>
         </span>
-        <div id="project-1" class="image-container">
+        <div class="image-container" id="project-1">
           <img draggable="false" src="@/assets/project-placeholder-1.webp" />
         </div>
       </div>
       <div class="project">
         <span>
-          <p class="project-title">project title</p>
-          <p>category</p>
+          <p class="project-title">Thinking for creativity</p>
         </span>
-        <div id="project-2" class="image-container">
+        <div class="image-container" id="project-2">
           <img draggable="false" src="@/assets/project-placeholder-2.webp" />
         </div>
       </div>
@@ -133,6 +131,9 @@ onMounted(showTooltip);
         &:hover {
           * {
             cursor: none;
+          }
+          img {
+            scale: 1.1;
           }
         }
       }

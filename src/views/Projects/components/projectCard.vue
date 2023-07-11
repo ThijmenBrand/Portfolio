@@ -26,7 +26,7 @@ async function categoryAsImageColor(element: any) {
 
 <template>
   <div class="line"></div>
-  <div class="project-card" @click="emit('click')">
+  <div class="project-card" :data-id="props.project.id" @click="emit('click')">
     <h2 :id="uniqueId" class="category">
       {{ props.project.category }}
     </h2>

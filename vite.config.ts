@@ -3,6 +3,7 @@ import vuetify from "vite-plugin-vuetify";
 
 import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
+import { resolve } from "node:path";
 
 export default defineConfig({
   plugins: [
@@ -23,6 +24,9 @@ export default defineConfig({
         additionalData: `@import "@/style/global.scss";`,
       },
     },
+  },
+  build: {
+    outDir: "C:/xampp/htdocs",
   },
   server: {
     port: 3000,
