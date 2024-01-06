@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100;500;700;900&family=Cutive+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@700&family=Josefin+Sans:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+@font-face {
+  font-family: "StrechPro";
+  src: url("@/assets/fonts/StretchPro.otf");
+}
+
+@font-face {
+  font-family: "Heavitas";
+  src: url("@/assets/fonts/Heavitas.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  font-family: "Cutive Mono", monospace;
+  background: linear-gradient(-45deg, #061136, #0d0225, #162455);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+
+p {
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
